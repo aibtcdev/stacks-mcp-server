@@ -1,0 +1,78 @@
+name: CI
+
+# Run CI on pushes to main and on all pull requests
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x, 22.x]
+    
+    steps:
+      # Step 1: Check out the repository code
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Step 2: Set up Node.js environment
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      # Step 3: Install dependencies
+      - name: Install dependencies
+        run: npm ci
+
+      # Step 4: Run TypeScript type checking
+      - name: Type check
+        run: npm run typecheck
+
+      # Step 5: Build the project
+      - name: Build project
+        run: npm run build
+
+      # Step 6: Run tests
+      - name: Run tests
+        run: npm test
+
+      # Step 7: Validate MCP tools are accessible
+      - name: Validate MCP server
+        run: npm run validate
+
+  # Job to ensure package can be packed correctly
+  package-test:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build project
+        run: npm run build
+
+      - name: Test npm pack
+        run: |
+          npm pack --dry-run
+          echo "✅ Package can be packed successfully"
+
+      - name: Check package contents
+        run: |
+          echo "📦 Package contents:"
+          npm pack --dry-run 2>/dev/null | grep -E "^npm notice.*: " 

@@ -1,0 +1,63 @@
+{
+  "name": "@aibtcdev/stacks-mcp-server",
+  "version": "0.1.0",
+  "description": "An MCP server providing basic Stacks.js blockchain functionality",
+  "type": "module",
+  "bin": {
+    "stacks-mcp-server": "./build/index.js"
+  },
+  "files": [
+    "build",
+    "README.md",
+    "LICENSE"
+  ],
+  "main": "./build/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aibtcdev/stacks-mcp-server.git"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "stacks",
+    "blockchain",
+    "bitcoin",
+    "hiro",
+    "stacks.js",
+    "ai",
+    "claude",
+    "assistant"
+  ],
+  "author": "aibtcdev",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "build": "tsc && node -e \"require('fs').chmodSync('build/index.js', '755')\"",
+    "clean": "rm -rf build",
+    "prepublishOnly": "npm run clean && npm run build",
+    "start": "npm run build && node build/index.js",
+    "dev": "npm run build && node build/index.js",
+    "watch": "tsc --watch",
+    "inspector": "npm run build && npx @modelcontextprotocol/inspector build/index.js",
+    "test": "npm run build && echo '✅ Testing stacks-mcp-server...' && node build/index.js --help",
+    "validate": "npm run build && echo '{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/list\",\"params\":{}}' | node build/index.js",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "0.6.0",
+    "@stacks/auth": "^7.1.0",
+    "@stacks/blockchain-api-client": "^8.11.5",
+    "@stacks/connect": "^8.1.9",
+    "@stacks/encryption": "^7.1.0",
+    "@stacks/network": "^7.0.2",
+    "@stacks/stacking": "^7.1.0",
+    "@stacks/storage": "^7.1.0",
+    "@stacks/transactions": "^7.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.24",
+    "typescript": "^5.3.3"
+  }
+}

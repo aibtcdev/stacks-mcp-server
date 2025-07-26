@@ -1,0 +1,69 @@
+# Source files (only include built files)
+src/
+*.ts
+!*.d.ts
+
+# Development and build configuration
+tsconfig.json
+.github/
+.vscode/
+.idea/
+
+# Test files
+tests/
+test/
+*.test.js
+*.test.ts
+*.spec.js
+*.spec.ts
+coverage/
+
+# Development dependencies and tools
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment files
+.env
+.env.*
+
+# Git files
+.git/
+.gitignore
+
+# Editor files
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+Thumbs.db
+ehthumbs.db
+
+# Temporary files
+tmp/
+temp/
+
+# Documentation source (keep README.md)
+docs/
+
+# CI configuration (keep for reference but not needed in package)
+.github/workflows/ci.yml
+
+# Development scripts and configs
+.eslintrc*
+.prettierrc*
+jest.config.*
+nodemon.json
+
+# Package lock files (keep package.json)
+package-lock.json
+yarn.lock
+
+# Examples and samples
+examples/
+samples/ 
