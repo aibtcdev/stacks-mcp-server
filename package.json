@@ -46,7 +46,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@modelcontextprotocol/sdk": "0.6.0",
+    "@modelcontextprotocol/sdk": "1.17.0",
     "@stacks/auth": "^7.1.0",
     "@stacks/blockchain-api-client": "^8.11.5",
     "@stacks/connect": "^8.1.9",
@@ -57,7 +57,7 @@
     "@stacks/transactions": "^7.1.0"
   },
   "devDependencies": {
-    "@types/node": "^20.11.24",
+    "@types/node": "^24.1.0",
     "typescript": "^5.3.3"
   }
 }
